@@ -1,2 +1,2 @@
 Movie Search
-A personal website intended for API practice. Using http://www.omdbapi.com/ movie API.
+A personal website intended for API practice. Using The Movie Database API.
