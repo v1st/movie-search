@@ -1,0 +1,78 @@
+@import 'colors';
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 8rem;
+  width: 100%;
+  border-bottom: 0.1rem solid $light-grey;
+  overflow: hidden;
+}
+
+.logo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 5rem;
+  width: 20rem;
+  border: 1px solid $dark-primary;
+  font-size: 2.4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: $dark-primary;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.searchbar__form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35rem;
+  height: 5rem;
+}
+
+.searchbar__input {
+  height: 4rem;
+  width: 25rem;
+  background: rgba($light-grey, $alpha: 0.5);
+  border: none;
+  border: 0.2rem solid $light-grey;
+  font-size: 1.8rem;
+  border-radius: 0.5rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  padding: 1rem;
+  color: white;
+
+  &::placeholder {
+    color: white;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.searchbar__button {
+  height: 4rem;
+  width: 8rem;
+  background: $primary;
+  border: none;
+  border-radius: 0.5rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  font-size: 1.8rem;
+  transition: all 0.2s ease-out;
+  box-shadow: 0px 0px 20px $primary;
+  color: $dark-primary;
+
+  &:hover {
+    cursor: pointer;
+    background: rgba(white, $alpha: 1.0);
+    box-shadow: 0px 0px 30px white;
+  }
+}

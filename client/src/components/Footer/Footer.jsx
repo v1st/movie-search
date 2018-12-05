@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import '../../scss/partials/footer.scss';
 
 class Footer extends Component {
   render() {
     return (
-      <div>
+      <footer className="footer">
         
-      </div>
+      </footer>
     )
   }
 }

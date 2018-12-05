@@ -1,0 +1,12 @@
+@import 'colors';
+
+.footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 20rem;
+  width: 100%;
+  background: $dark-grey;
+  border-top: 0.1rem solid $light-grey;
+  bottom: 0;
+}

@@ -1,0 +1,36 @@
+@import 'colors';
+
+.carousel {
+  /* line them up horizontally */
+  display: flex;
+  justify-content: flex-start;
+  overflow-y: hidden;
+  overflow-x: auto;
+  /* make it smooth on iOS */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  /* each slide snaps into place */
+  scroll-snap-type: mandatory;
+  height: calc(100vh - 8rem);
+  width: 100%;
+  background: rgba($light-grey, $alpha: 0.05);
+}
+
+.carousel__item {
+  flex: 1 0 100%;
+  height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+img {
+  flex: 1 0 100%;
+  min-height: 100%;
+  min-width: 100%;
+  max-width: 125%;
+  background: no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
