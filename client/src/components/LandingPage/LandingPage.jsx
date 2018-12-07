@@ -13,12 +13,9 @@ class LandingPage extends Component {
       slides: ['https://image.tmdb.org/t/p/original/5yAEbTXiJZQpNx7eCyyOhnY9MYw.jpg', 'https://image.tmdb.org/t/p/original/vc8bCGjdVp0UbMNLzHnHSLRbBWQ.jpg',
         'https://image.tmdb.org/t/p/original/7IBpOrw0ATwL1AOV97mtsceDpYs.jpg', 'https://image.tmdb.org/t/p/original/ujAY1ad7yS2TfV0GDNGUZ7DK0mo.jpg'],
     }
-
-    this.slides = React.createRef();
   }
 
   componentDidMount() {
-
     // Init Swiper.js Carousel
     const swiper = new Swiper('.swiper-container', {
       init: true,
@@ -29,6 +26,7 @@ class LandingPage extends Component {
       autoplayDisableOnInteraction: false,
       effect: 'slide',
       centeredSlides: true,
+
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
@@ -42,20 +40,16 @@ class LandingPage extends Component {
 
 
   render() {
-    // Hold carousel slides in an array
-    this.slides = [];
-
     // Render slides for Landing carousel
     const renderedSlides = this.state.slides.map((slide, index) => {
-      return <div key={index} ref={slide => this.slides.push(slide)} className="carousel__item swiper-slide"><img src={slide} alt="slide" /></div>
+      return <div key={index} className="swiper-slide"><img src={slide} alt="slide" /></div>
     });
-
 
     return (
       <div>
         <NavBar />
         <div className="carsouel__wrap swiper-container">
-          <div className="carousel swiper-wrapper" ref={this.slider}>
+          <div className="swiper-wrapper">
             {renderedSlides}
           </div>
           <button className="previous__button swiper-button-prev" onClick={this.changeSlides} value="prev">Prev</button>
