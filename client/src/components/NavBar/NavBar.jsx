@@ -7,9 +7,9 @@ class NavBar extends Component {
       <nav className="navbar">
         <div className="logo">Movie Search</div>
 
-        <form class="searchbar__form">
-          <input class="searchbar__input" type="search" placeholder="Search" aria-label="Search" />
-          <button class="searchbar__button" type="submit">Search</button>
+        <form className="searchbar__form">
+          <input className="searchbar__input" type="search" placeholder="Search" aria-label="Search" />
+          <button className="searchbar__button" type="submit">Search</button>
         </form>
       </nav>
     )

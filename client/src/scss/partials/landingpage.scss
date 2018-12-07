@@ -1,27 +1,29 @@
 @import 'colors';
 
-.carousel {
-  /* line them up horizontally */
-  display: flex;
-  justify-content: flex-start;
-  overflow-y: hidden;
-  overflow-x: auto;
-  /* make it smooth on iOS */
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  /* each slide snaps into place */
-  scroll-snap-type: mandatory;
-  height: calc(100vh - 8rem);
-  width: 100%;
-  background: rgba($light-grey, $alpha: 0.05);
+.carsouel__wrap {
+  position: relative;
 }
 
-.carousel__item {
-  flex: 1 0 100%;
-  height: 100%;
-  max-width: 100%;
-  overflow: hidden;
-}
+// .carousel {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   overflow-y: hidden;
+//   overflow-x: auto;
+//   scroll-behavior: smooth;
+//   -webkit-overflow-scrolling: touch;
+//   scroll-snap-type: mandatory;
+//   height: calc(100vh - 8rem);
+//   width: 100%;
+//   background: rgba($light-grey, $alpha: 0.05);
+// }
+
+// .carousel__item {
+//   flex: 1 0 100%;
+//   height: 100%;
+//   max-width: 100%;
+//   overflow: hidden;
+// }
 
 img {
   flex: 1 0 100%;
@@ -33,4 +35,63 @@ img {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.previous__button,
+.next__button {
+  position: absolute;
+  height: 3rem;
+  width: 6rem;
+  background: $primary;
+  border: none;
+  font-size: 1.5rem;
+  color: $dark-grey;
+  box-shadow: 0 0 0.7rem rgba($primary, $alpha: 1);
+  opacity: 0.95;
+  border-radius: 1rem;
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    cursor: pointer;
+    background: white;
+    box-shadow: 0 0rem 1rem rgba(white, $alpha: 1);
+  }
+  &:active {
+    outline: none;
+  }
+}
+
+.previous__button {
+  left: 5%;
+}
+
+.next__button {
+  right: 5%;
+}
+
+.swiper-container {
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiper-wrapper { display: flex; }
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
 }
