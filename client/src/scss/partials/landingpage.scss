@@ -1,7 +1,21 @@
 @import 'colors';
 
-.carsouel__wrap {
+.carousel__wrap {
   position: relative;
+  border-bottom: 1px solid $light-grey;
+
+  &::after {
+    content: '';
+    display: block;
+    box-shadow: inset 0 -10rem 20rem $dark-grey;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+  }
 }
 
 img {
@@ -16,27 +30,82 @@ img {
   background-size: cover;
 }
 
+
+.banner__info {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  padding: 5rem 14%;
+  background: rgba($dark-grey, 0.5);
+}
+
+.banner__title {
+  font-size: 5rem;
+  font-weight: 300;
+  margin: 0;
+  color: $primary;
+}
+
+.banner__rating {
+  background: $dark-grey;
+  padding: 0.1rem 0.8rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: auto;
+  color: $primary-light;
+  opacity: 0.9;
+}
+
+.banner__date {
+  font-size: 1.6rem;
+  color: white;
+}
+
+.banner__text {
+  font-size: 2.4rem;
+  max-width: 400px;
+  line-height: 1.3;
+  text-align: left;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+
 .previous__button,
 .next__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  height: 3rem;
-  width: 6rem;
-  background: $primary;
+  padding-bottom: 3px;
+  height: 4rem;
+  width: 4rem;
+  background: white;
   border: none;
-  font-size: 1.5rem;
-  color: $dark-grey;
-  box-shadow: 0 0 0.7rem rgba($primary, $alpha: 1);
-  opacity: 0.95;
-  border-radius: 1rem;
+  font-size: 3rem;
+  text-align: center;
+  color: $dark-primary;
+  box-shadow: 0 0 0.7rem rgba(white, $alpha: 1);
+  opacity: 0.6;
+  border-radius: 50%;
   transition: all 0.2s ease-out;
 
   &:hover {
     cursor: pointer;
+    opacity: 0.95;
     background: white;
     box-shadow: 0 0rem 1rem rgba(white, $alpha: 1);
   }
 
-  &:active {
+  &:active,
+  &:focus {
     outline: none;
   }
 }
@@ -63,6 +132,7 @@ img {
 }
 
 .swiper-slide {
+  position: relative;
   text-align: center;
   font-size: 18px;
   background: #fff;
@@ -78,5 +148,14 @@ img {
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
-  max-height: 650px;
+  max-height: 65rem;
+}
+
+.swiper-pagination-bullet {
+  background-color: $light-grey;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: $primary-light;
+  box-shadow: 0 0 1rem $primary;
 }
