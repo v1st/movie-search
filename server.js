@@ -1,19 +1,34 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const app = express();
-const bodyParser = require('body-parser');
 
 const url = 'http://localhost/';
 const port = process.env.PORT || 5000;
 
-const config = require('./config');
-const apiKey = config.API_KEY;
+const keys = require('./config/keys');
+const apiKey = keys.API_KEY;
+const URI = keys.URI;
 
-const searchURL = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=spider%20man&page=1&include_adult=false`;
+const db = URI;
+
+// Middleware
+app.use(bodyParser.json());
+
+// DB config
+mongoose
+  .connect(db)
+  .then(() => console.log('Connected to MongoDB...'))
+  .catch(err => console.log(err));
 
 
 app.get('/', (req, res) => res.send('hi'));
 
+const updater = require('./api/updater');
 
+updater.updatePopularMovies();
 
-app.listen(port, () => { console.log(`App listening on ${url}${port} `); });
+app.listen(port, () => {
+  console.log(`App listening on ${url}${port} `);
+});
