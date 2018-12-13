@@ -30,7 +30,7 @@ app.use('/api', router);
 
 // Connect API Updater
 const updater = require('./api/updater');
-updater.updatePopularMovies();
+updater.updateMovies();
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {

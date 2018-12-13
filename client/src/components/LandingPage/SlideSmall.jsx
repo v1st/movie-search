@@ -1,23 +1,12 @@
 import React, { Component } from 'react'
 import Swiper from 'swiper';
-import axios from 'axios';
 
 class SlideSmall extends Component {
   constructor() {
     super();
     this.state = {
       poster: ['https://image.tmdb.org/t/p/original/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg'],
-      popularData: []
     }
-  }
-
-  componentDidMount() {
-    // Serve Movie Database info from backend
-    axios.get('/api')
-    .then(res => this.setState({
-      popularData: res.data
-    }))
-    .catch(e => console.log(e));
   }
 
   componentDidUpdate() {
@@ -35,27 +24,30 @@ class SlideSmall extends Component {
   }
 
   render() {
-    const renderedSlides = this.state.popularData.map((slide, index) => {
-      const { overview, poster_path, title, release_date, vote_average } = slide
-      let img = `https://image.tmdb.org/t/p/original${poster_path}`;
-
-      return (
-        <div className="swiper-slide slide--small" key={index}>
-          <div className="slide__bg">
-            <img src={img} alt="slide" />
-          </div>
-
-          <div className="slide__info">
-            <div className="title">{title}</div>
-            <div className="rating">{vote_average}/10</div>
-            <div className="date">{release_date}</div>
-            <div className="text">
-              <p></p>
+    let renderedSlides;
+    if (this.props.data) {
+      renderedSlides = this.props.data.pageResults.results.map((slide, index) => {
+        const { overview, poster_path, title, release_date, vote_average } = slide
+        let img = `https://image.tmdb.org/t/p/original${poster_path}`;
+  
+        return (
+          <div className="swiper-slide slide--small" key={index}>
+            <div className="slide__bg">
+              <img src={img} alt="slide" />
+            </div>
+  
+            <div className="slide__info">
+              <div className="title">{title}</div>
+              <div className="rating">{vote_average}/10</div>
+              <div className="date">{release_date}</div>
+              <div className="text">
+                <p>{overview}</p>
+              </div>
             </div>
           </div>
-        </div>
-      )
-    });
+        )
+      });
+    }
 
     return (
       <div className="slider__section">

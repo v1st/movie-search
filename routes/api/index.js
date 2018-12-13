@@ -1,25 +1,37 @@
 const express = require('express');
 const router = express.Router();
 
-// Popular movie model
-const Popular = require('../../models/Popular');
+// Movie model
+const Movie = require('../../models/Movie');
+
+const popular = {
+  id: '5c12862fedff43043c807f50'
+}
+const upcoming = {
+  id: '5c12862fedff43043c807f4f'
+}
+const nowPlaying = {
+  id: '5c12862fedff43043c807f4e'
+}
 
 // API call to /api
-
 router.get('/', async (req, res) => {
+  const documents = [popular, upcoming, nowPlaying];
+
+  let payload = await Promise.all( documents.map(doc => {
+    return Movie.findById({
+      '_id': doc.id
+    }, (err, data) => {
+      if (err) {
+        return console.log(err);
+      }
+      return data;
+    });
+  }));
+
   // Return array of data
-
-  let popularMovieData = await Popular.findById({
-    '_id': "5c0f1b8ca3f36837941eed2e"
-  }, (err, data) => {
-    if (err) {
-      return console.log(err);
-    };
-    return data;
-  });
-
   res.status(200).send(
-    popularMovieData.pageResults.results
+    payload
   );
 });
 

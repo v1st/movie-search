@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Create Schema
-const PopularSchema = new Schema({
+const MovieSchema = new Schema({
   pageResults: {
     type: Object,
     required: true
   }
 });
 
-module.exports = Popular = mongoose.model('Popular', PopularSchema);
+module.exports = Movie = mongoose.model('Movie', MovieSchema);
