@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Swiper from 'swiper';
+//import axios from 'axios';
 
 class Carousel extends Component {
   constructor(props) {
@@ -9,6 +10,8 @@ class Carousel extends Component {
         'https://image.tmdb.org/t/p/original/7IBpOrw0ATwL1AOV97mtsceDpYs.jpg', 'https://image.tmdb.org/t/p/original/ujAY1ad7yS2TfV0GDNGUZ7DK0mo.jpg'],
     }
   }
+
+
 
   componentDidMount() {
     // Init Swiper.js Carousel
@@ -34,6 +37,7 @@ class Carousel extends Component {
         prevEl: '.previous__button',
       },
     });
+
   }
 
   render() {
@@ -44,15 +48,16 @@ class Carousel extends Component {
           <img src={slide} alt="slide" />
 
           <div className="banner__info">
-          <div className="banner__title">Title</div>
-          <div className="banner__rating">9.1</div>
-          <div className="banner__date">2008</div>
-          <div className="banner__text">
-            <p>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</p>
+            <div className="banner__title">Title</div>
+            <div className="banner__rating">9.1</div>
+            <div className="banner__date">2008</div>
+            <div className="banner__text">
+              <p>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</p>
+            </div>
           </div>
         </div>
-        </div>
-      )});
+      )
+    });
 
     return (
       <div className="carousel__wrap swiper-container swiper1">

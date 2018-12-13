@@ -1,8 +1,6 @@
 const axios = require('axios');
 const Popular = require('../models/Popular');
-
 const API_KEY = require('../config/keys').API_KEY;
-const db = require('../config/keys').URI;
 
 const popularURL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
 // const searchURL = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=spider%20man&page=1&include_adult=false`;

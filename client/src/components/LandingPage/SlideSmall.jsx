@@ -1,17 +1,26 @@
 import React, { Component } from 'react'
 import Swiper from 'swiper';
+import axios from 'axios';
 
 class SlideSmall extends Component {
   constructor() {
     super();
     this.state = {
-      poster: ['https://image.tmdb.org/t/p/original/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg']
+      poster: ['https://image.tmdb.org/t/p/original/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg'],
+      popularData: []
     }
-
-
   }
 
   componentDidMount() {
+    // Serve Movie Database info from backend
+    axios.get('/api')
+    .then(res => this.setState({
+      popularData: res.data
+    }))
+    .catch(e => console.log(e));
+  }
+
+  componentDidUpdate() {
     // Init Swiper.js Carousel
     // eslint-disable-next-line
     const swiper2 = new Swiper('.swiper2', {
@@ -25,35 +34,34 @@ class SlideSmall extends Component {
     });
   }
 
-
   render() {
-    const renderedSlides =
-      <div className="swiper-slide slide--small">
-        <div className="slide__bg">
-          <img src={this.state.poster[0]} alt="slide" />
-        </div>
+    const renderedSlides = this.state.popularData.map((slide, index) => {
+      const { overview, poster_path, title, release_date, vote_average } = slide
+      let img = `https://image.tmdb.org/t/p/original${poster_path}`;
 
-        <div className="slide__info">
-          <div className="title">Title</div>
-          <div className="rating">9.1</div>
-          <div className="date">2008</div>
-          <div className="text">
-            <p>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</p>
+      return (
+        <div className="swiper-slide slide--small" key={index}>
+          <div className="slide__bg">
+            <img src={img} alt="slide" />
+          </div>
+
+          <div className="slide__info">
+            <div className="title">{title}</div>
+            <div className="rating">{vote_average}/10</div>
+            <div className="date">{release_date}</div>
+            <div className="text">
+              <p></p>
+            </div>
           </div>
         </div>
-      </div>
-      ;
+      )
+    });
 
     return (
       <div className="slider__section">
         <h2 className="title">{this.props.title}</h2>
         <div className="swiper-container swiper2">
           <div className="swiper-wrapper">
-            {renderedSlides}
-            {renderedSlides}
-            {renderedSlides}
-            {renderedSlides}
-            {renderedSlides}
             {renderedSlides}
           </div>
 
