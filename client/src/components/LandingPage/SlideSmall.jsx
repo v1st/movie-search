@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import Swiper from 'swiper';
 
 class SlideSmall extends Component {
@@ -29,22 +30,25 @@ class SlideSmall extends Component {
       renderedSlides = this.props.data.pageResults.results.map((slide, index) => {
         const { overview, poster_path, title, release_date, vote_average } = slide
         let img = `https://image.tmdb.org/t/p/original${poster_path}`;
-  
+        let path = title.replace(/\s/g, '-');
+
         return (
-          <div className="swiper-slide slide--small" key={index}>
-            <div className="slide__bg">
-              <img src={img} alt="slide" />
-            </div>
-  
-            <div className="slide__info">
-              <div className="title">{title}</div>
-              <div className="rating">{vote_average}/10</div>
-              <div className="date">{release_date}</div>
-              <div className="text">
-                <p>{overview}</p>
+          <React.Fragment key={index}>
+            <Link to={{ pathname: `/movie/${path}` }} key={index} className="swiper-slide slide--small">
+              <div className="slide__bg">
+                <img src={img} alt="slide" />
               </div>
-            </div>
-          </div>
+
+              <div className="slide__info">
+                <div className="title">{title}</div>
+                <div className="rating">{vote_average}/10</div>
+                <div className="date">{release_date}</div>
+                <div className="text">
+                  {/* <p>{overview}</p> */}
+                </div>
+              </div>
+            </Link>
+          </React.Fragment>
         )
       });
     }
@@ -56,7 +60,6 @@ class SlideSmall extends Component {
           <div className="swiper-wrapper">
             {renderedSlides}
           </div>
-
         </div>
         <div className="underline"></div>
       </div>
