@@ -20,7 +20,7 @@ const nowPlaying = {
 module.exports = {
   updateMovies: () => {
     const documents = [popular, upcoming, nowPlaying];
-    
+
     documents.map(doc => {
       axios.get(doc.url)
         .then(async res => {

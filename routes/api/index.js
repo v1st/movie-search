@@ -18,7 +18,7 @@ const nowPlaying = {
 router.get('/', async (req, res) => {
   const documents = [popular, upcoming, nowPlaying];
 
-  let payload = await Promise.all( documents.map(doc => {
+  let payload = await Promise.all(documents.map(doc => {
     return Movie.findById({
       '_id': doc.id
     }, (err, data) => {
@@ -30,6 +30,21 @@ router.get('/', async (req, res) => {
   }));
 
   // Return array of data
+  res.status(200).send(
+    payload
+  );
+});
+
+router.get('/header', async (req, res) => {
+  let payload = await Movie.findById({
+    '_id': '5c12862fedff43043c807f50'
+  }, (err, data) => {
+    if (err) {
+      return console.log(err);
+    }
+    return data;
+  });
+  
   res.status(200).send(
     payload
   );

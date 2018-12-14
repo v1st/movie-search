@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
 import Swiper from 'swiper';
-//import axios from 'axios';
+import axios from 'axios';
 
 class Carousel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      slides: ['https://image.tmdb.org/t/p/original/5yAEbTXiJZQpNx7eCyyOhnY9MYw.jpg', 'https://image.tmdb.org/t/p/original/vc8bCGjdVp0UbMNLzHnHSLRbBWQ.jpg',
-        'https://image.tmdb.org/t/p/original/7IBpOrw0ATwL1AOV97mtsceDpYs.jpg', 'https://image.tmdb.org/t/p/original/ujAY1ad7yS2TfV0GDNGUZ7DK0mo.jpg'],
+      carouselData: []
     }
   }
 
-
-
   componentDidMount() {
+    // Serve Movie Database info from backend
+    axios.get('/api/header')
+      .then(res => {
+        let slicedArr = res.data.pageResults.results.slice(0, 4);
+        this.setState({
+          carouselData: slicedArr
+        })
+      })
+      .catch(e => console.log(e));
+  }
+
+  componentDidUpdate() {
     // Init Swiper.js Carousel
     // eslint-disable-next-line
     const swiper = new Swiper('.swiper1', {
@@ -37,22 +46,25 @@ class Carousel extends Component {
         prevEl: '.previous__button',
       },
     });
-
   }
+
 
   render() {
     // Render slides for Landing carousel
-    const renderedSlides = this.state.slides.map((slide, index) => {
+    const renderedSlides = this.state.carouselData.map((slide, index) => {
+      const { overview, backdrop_path, title, release_date, vote_average } = slide
+      let img = `https://image.tmdb.org/t/p/original${backdrop_path}`;
+
       return (
         <div key={index} className="swiper-slide">
-          <img src={slide} alt="slide" />
+          <img src={img} alt="slide" />
 
           <div className="banner__info">
-            <div className="banner__title">Title</div>
-            <div className="banner__rating">9.1</div>
-            <div className="banner__date">2008</div>
+            <div className="banner__title">{title}</div>
+            <div className="banner__rating">{vote_average}/10</div>
+            <div className="banner__date">{release_date}</div>
             <div className="banner__text">
-              <p>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</p>
+              <p>{overview}</p>
             </div>
           </div>
         </div>
