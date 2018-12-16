@@ -5,10 +5,10 @@ import Footer from './Footer/Footer';
 class Missing extends Component {
   render() {
     return (
-      <div>
+      <React.Fragment>
         <NavBar />
         <Footer />
-      </div>
+      </React.Fragment>
     )
   }
 }

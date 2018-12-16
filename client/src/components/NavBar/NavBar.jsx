@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import '../../scss/partials/navbar.scss';
 
 class NavBar extends Component {
   render() {
     return (
       <nav className="navbar">
-        <div className="logo">Movie Search</div>
+        <Link to='/' style={{textDecoration: 'none'}}>
+          <div className="logo">Movie Search</div>
+        </Link>
 
         <form className="searchbar__form">
           <input className="searchbar__input" type="search" placeholder="Search" aria-label="Search" />
