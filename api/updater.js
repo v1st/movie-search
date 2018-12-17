@@ -20,13 +20,10 @@ const nowPlaying = {
 module.exports = {
   updateMovies: () => {
     const documents = [popular, upcoming, nowPlaying];
-
-    documents.map(doc => {
+    
+    documents.map((async doc => {
       axios.get(doc.url)
         .then(async res => {
-          // const newDoc = new Movie({
-          //   pageResults: res.data
-          // })
           await Movie.findOneAndUpdate({
             '_id': doc.id
           }, {
@@ -42,6 +39,6 @@ module.exports = {
           });
         })
         .catch(err => console.log(err));
-    });
+    }));
   }
 }

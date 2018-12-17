@@ -14,7 +14,7 @@ class App extends Component {
         <div className="App">
           <Switch>
             <Route path='/' component={LandingPage} exact />
-            <Route path="/movie/" component={Movie}/>
+            <Route path="/movie/:id" component={Movie}/>
             <Route component={Missing} />
           </Switch>
         </div>

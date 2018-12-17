@@ -1,5 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
+
+const {
+  API_KEY
+} = require('../../config/keys');
 
 // Movie model
 const Movie = require('../../models/Movie');
@@ -44,10 +49,32 @@ router.get('/header', async (req, res) => {
     }
     return data;
   });
-  
+
   res.status(200).send(
     payload
   );
+});
+
+router.post('/movie/:id', async (req, res) => {
+  const detailsURL = `https://api.themoviedb.org/3/movie/${req.body.id}?api_key=${API_KEY}&language=en-US`;
+  const castURL = `https://api.themoviedb.org/3/movie/${req.body.id}/credits?api_key=${API_KEY}`;
+  let cast, details;
+
+  await axios.get(castURL)
+    .then(response => cast = response)
+    .catch(err => console.log(err))
+  await axios.get(detailsURL)
+    .then(response => details = response)
+    .catch(err => console.log(err))
+
+
+
+  res.status(200).send({
+    param: {
+      cast: cast.data.cast,
+      details: details.data
+    }
+  })
 });
 
 module.exports = router;

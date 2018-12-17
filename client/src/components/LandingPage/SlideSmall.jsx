@@ -28,13 +28,12 @@ class SlideSmall extends Component {
     let renderedSlides;
     if (this.props.data) {
       renderedSlides = this.props.data.pageResults.results.map((slide, index) => {
-        const { overview, poster_path, title, release_date, vote_average } = slide
+        const { id, overview, poster_path, title, release_date, vote_average } = slide
         let img = `https://image.tmdb.org/t/p/original${poster_path}`;
-        let path = title.replace(/\s/g, '-');
 
         return (
           <React.Fragment key={index}>
-            <Link to={{ pathname: `/movie/${path}` }} key={index} className="swiper-slide slide--small">
+            <Link to={{ pathname: `/movie/${id}` }} key={index} className="swiper-slide slide--small">
               <div className="slide__bg">
                 <img src={img} alt="slide" />
               </div>
