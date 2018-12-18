@@ -18,8 +18,7 @@
   flex-direction: row;
   align-items: flex-start;
   width: 120rem;
-  height: 60rem;
-  border: 1px solid red;
+  height: 70rem;
   padding: 2rem;
 }
 
@@ -46,7 +45,6 @@
 
   img {
     object-fit: cover;
-
   }
 }
 
@@ -55,16 +53,69 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  max-width: 50%;
+  max-width: 60%;
   height: 100%;
   z-index: 5;
-  border: 1px solid purple;
+}
+
+.genre__container {
+  display: flex;
+  list-style-type: none;
+  margin-bottom: 1rem;
+}
+
+.movie__genre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 300;
+  height: 3.2rem;
+  padding: 0 1.8rem;
+  margin: 0 0.8rem;
+  border: 0.2rem solid $primary;
+  border-radius: 2.5rem;
+
+  &:first-child {
+    margin-left: 0;
+  }
 }
 
 .movie__title {
+  font-family: "Yeseva One";
   font-size: 8rem;
   font-weight: 300;
   color: white;
+  line-height: 6.5rem;
+  margin-bottom: 2rem;
+}
+
+.movie__cast--preview {
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: white;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+
+.movie__release {
+  font-size: 1.4rem;
+  width: 80%;
+  text-align: left;
+  color: white;
+  margin-bottom: 1.4rem;
+}
+
+.movie__summary {
+  font-size: 1.8rem;
+  width: 85%;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.808);
+  margin-bottom: 1rem;
 }
 
 .movie__rating {
@@ -77,18 +128,4 @@
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   max-width: 10rem;
-}
-
-.movie__release {
-  font-size: 1.8rem;
-  width: 80%;
-  text-align: left;
-  color: white;
-}
-
-.movie__summary {
-  font-size: 1.8rem;
-  width: 80%;
-  text-align: left;
-  color: white;
 }

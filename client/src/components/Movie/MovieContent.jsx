@@ -14,14 +14,14 @@ class MovieContent extends Component {
     }
 
     this.fetchAPI = this.fetchAPI.bind(this);
+    this.renderTime = this.renderTime.bind(this);
   }
-  // Need to import Genres, tagline, runtime, cast -credits
-  // Possibly get video
 
   componentDidMount() {
     this.fetchAPI();
   }
 
+  // Fetch movie details and cast info
   fetchAPI() {
     axios.post(`/api/movie/${this.props.match.params.id}`, {
       id: `${this.props.match.params.id}`
@@ -35,6 +35,11 @@ class MovieContent extends Component {
       .catch(err => console.log(err));
   }
 
+  // Format run time 
+  renderTime(n) {
+    return `${n / 60 ^ 0} HRS ${n % 60} MINS`;
+  }
+
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
@@ -42,6 +47,7 @@ class MovieContent extends Component {
   }
 
   render() {
+    // Loading animation before api call
     if (this.state.isLoading) {
       return (
         <main className="main__container">
@@ -53,24 +59,31 @@ class MovieContent extends Component {
         </main>
       );
     }
-    let img = null;
-    let { overview, backdrop_path, title, release_date, vote_average } = this.state.details
-    let imgURL = `https://image.tmdb.org/t/p/original/${backdrop_path}`;
 
-    img = <img src={imgURL} alt="moive poster" />
+    const { genres, overview, backdrop_path, title, release_date, runtime, vote_average } = this.state.details
+    const { cast } = this.state
+    
+    const imgURL = `https://image.tmdb.org/t/p/original/${backdrop_path}`;
+    const threeCastMembers = cast.splice(0, 3).map(actor => actor.name).join(", ");
+    const formatTime = this.renderTime(runtime);
+    const renderGenres = genres.map((genre, index) => <li key={index} className="movie__genre">{genre.name}</li>);
 
     return (
       <main className="main__container">
         <div className="poster__wrap">
-          {img}
+          <img src={imgURL} alt="moive poster" />
         </div>
 
         <div className="movie__container">
           <div className="movie-info__wrap">
+            <ul className="genre__container">
+              {renderGenres}
+            </ul>
             <h1 className="movie__title">{title}</h1>
-            <div className="movie__rating">{vote_average}/10</div>
-            <div className="movie__release">{release_date}</div>
+            <div className="movie__cast--preview">{threeCastMembers}</div>
+            <div className="movie__release">{formatTime} &bull; {release_date}</div>
             <div className="movie__summary">{overview}</div>
+            <div className="movie__rating">{vote_average}/10</div>
           </div>
 
         </div>
