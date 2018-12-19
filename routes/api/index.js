@@ -58,7 +58,8 @@ router.get('/header', async (req, res) => {
 router.post('/movie/:id', async (req, res) => {
   const detailsURL = `https://api.themoviedb.org/3/movie/${req.body.id}?api_key=${API_KEY}&language=en-US`;
   const castURL = `https://api.themoviedb.org/3/movie/${req.body.id}/credits?api_key=${API_KEY}`;
-  let cast, details;
+  const videoURL = `https://api.themoviedb.org/3/movie/${req.body.id}/videos?api_key=${API_KEY}&language=en-US`;
+  let cast, details, video;
 
   await axios.get(castURL)
     .then(response => cast = response)
@@ -66,13 +67,17 @@ router.post('/movie/:id', async (req, res) => {
   await axios.get(detailsURL)
     .then(response => details = response)
     .catch(err => console.log(err))
+  await axios.get(videoURL)
+    .then(response => video = response)
+    .catch(err => console.log(err))
 
 
 
   res.status(200).send({
     param: {
       cast: cast.data.cast,
-      details: details.data
+      details: details.data,
+      video: video.data
     }
   })
 });

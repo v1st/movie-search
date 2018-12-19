@@ -21,7 +21,7 @@ class CastBar extends Component {
     const swiper3 = new Swiper('.swiper3', {
       init: true,
       grabCursor: true,
-      slidesPerView: 4,
+      slidesPerView: 7,
       spaceBetween: 5,
       loop: true,
       autoplayDisableOnInteraction: false,

@@ -5,6 +5,7 @@ import '../../scss/partials/moviecontent.scss';
 import axios from 'axios';
 
 import CastBar from './CastBar';
+import LightBox from './LightBox';
 
 class MovieContent extends Component {
   constructor(props) {
@@ -12,11 +13,15 @@ class MovieContent extends Component {
     this.state = {
       cast: [],
       details: {},
+      video: '',
       isLoading: true,
+      lightboxState: "lightbox--closed"
     }
 
     this.fetchAPI = this.fetchAPI.bind(this);
     this.renderTime = this.renderTime.bind(this);
+    this.openLightBox = this.openLightBox.bind(this);
+    this.closeLightBox = this.closeLightBox.bind(this);
   }
 
   componentDidMount() {
@@ -32,7 +37,8 @@ class MovieContent extends Component {
         this.setState({
           cast: response.data.param.cast,
           details: response.data.param.details,
-          isLoading: false
+          video: response.data.param.video.results,
+          isLoading: false,
         }))
       .catch(err => console.log(err));
   }
@@ -40,6 +46,22 @@ class MovieContent extends Component {
   // Format run time 
   renderTime(n) {
     return `${n / 60 ^ 0} HRS ${n % 60} MINS`;
+  }
+
+  // Open video lightbox on click of trailer btn
+  openLightBox(e) {
+    this.setState({
+      lightboxState: "lightbox"
+    });
+  }
+
+  // Close video lightbox from clicking anywhere out of box
+  closeLightBox() {
+    if (this.state.lightboxState === "lightbox") {
+      this.setState({
+        lightboxState: "lightbox--closed",
+      });
+    }
   }
 
   static propTypes = {
@@ -69,6 +91,7 @@ class MovieContent extends Component {
     const threeCastMembers = cast.splice(0, 3).map(actor => actor.name).join(", ");
     const formatTime = this.renderTime(runtime);
     const renderGenres = genres.map((genre, index) => <li key={index} className="movie__genre">{genre.name}</li>);
+    const videoURL = `https://www.youtube.com/embed/${this.state.video[0].key}?enablejsapi=1`;
 
     return (
       <main className="main-movie__container">
@@ -85,11 +108,19 @@ class MovieContent extends Component {
             <div className="movie__cast--preview">{threeCastMembers}</div>
             <div className="movie__release">{formatTime} &bull; {release_date}</div>
             <div className="movie__summary">{overview}</div>
-            <div className="movie__rating">{vote_average}/10</div>
+            <div className="rating-video__wrapper">
+              <div className="movie__rating">{vote_average}/10</div>
+              <button className="movie__video" onClick={(e) => this.openLightBox(e)} value={videoURL}>Trailer</button>
+            </div>
             <CastBar data={cast} />
           </div>
-
         </div>
+
+        <LightBox
+          videoURL={videoURL}
+          title={title}
+          lightboxState={this.state.lightboxState}
+          onClick={this.closeLightBox} />
       </main>
     )
   }
