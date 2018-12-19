@@ -3,13 +3,6 @@ import { Link } from 'react-router-dom';
 import Swiper from 'swiper';
 
 class SlideSmall extends Component {
-  constructor() {
-    super();
-    this.state = {
-      poster: ['https://image.tmdb.org/t/p/original/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg'],
-    }
-  }
-
   componentDidUpdate() {
     // Init Swiper.js Carousel
     // eslint-disable-next-line
@@ -28,14 +21,14 @@ class SlideSmall extends Component {
     let renderedSlides;
     if (this.props.data) {
       renderedSlides = this.props.data.pageResults.results.map((slide, index) => {
-        const { id, overview, poster_path, title, release_date, vote_average } = slide
+        const { id, poster_path, title, release_date, vote_average } = slide
         let img = `https://image.tmdb.org/t/p/original${poster_path}`;
 
         return (
           <React.Fragment key={index}>
             <Link to={{ pathname: `/movie/${id}` }} key={index} className="swiper-slide slide--small">
               <div className="slide__bg">
-                <img src={img} alt="slide" />
+                <img className="bg__img" src={img} alt="slide" />
               </div>
 
               <div className="slide__info">
@@ -43,7 +36,6 @@ class SlideSmall extends Component {
                 <div className="rating">{vote_average}/10</div>
                 <div className="date">{release_date}</div>
                 <div className="text">
-                  {/* <p>{overview}</p> */}
                 </div>
               </div>
             </Link>

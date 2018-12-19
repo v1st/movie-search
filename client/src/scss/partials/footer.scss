@@ -34,15 +34,15 @@
 .copyright, {
   text-align: center;
   font-size: 1.2rem;
-  color: $primary-light;
+  color: $dark-grey;
 }
 .tmdb__link{
   font-size: 1.2rem;
-  color: $primary-light;
+  color: $dark-grey;
   &:focus {
     outline: none;
   }
   &:visited {
-    color: $primary-light;
+    color: $dark-grey;
   }
 }

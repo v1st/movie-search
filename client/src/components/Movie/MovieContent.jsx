@@ -4,6 +4,8 @@ import { withRouter } from "react-router";
 import '../../scss/partials/moviecontent.scss';
 import axios from 'axios';
 
+import CastBar from './CastBar';
+
 class MovieContent extends Component {
   constructor(props) {
     super(props);
@@ -62,14 +64,14 @@ class MovieContent extends Component {
 
     const { genres, overview, backdrop_path, title, release_date, runtime, vote_average } = this.state.details
     const { cast } = this.state
-    
+
     const imgURL = `https://image.tmdb.org/t/p/original/${backdrop_path}`;
     const threeCastMembers = cast.splice(0, 3).map(actor => actor.name).join(", ");
     const formatTime = this.renderTime(runtime);
     const renderGenres = genres.map((genre, index) => <li key={index} className="movie__genre">{genre.name}</li>);
 
     return (
-      <main className="main__container">
+      <main className="main-movie__container">
         <div className="poster__wrap">
           <img src={imgURL} alt="moive poster" />
         </div>
@@ -84,6 +86,7 @@ class MovieContent extends Component {
             <div className="movie__release">{formatTime} &bull; {release_date}</div>
             <div className="movie__summary">{overview}</div>
             <div className="movie__rating">{vote_average}/10</div>
+            <CastBar data={cast} />
           </div>
 
         </div>
