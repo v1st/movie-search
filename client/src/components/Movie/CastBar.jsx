@@ -29,7 +29,6 @@ class CastBar extends Component {
   }
 
   render() {
-    console.log(this.props)
     // Generate Cast Cards
     let renderedCards = this.props.data.map((actor, index) => {
       const { character, name, profile_path, } = actor;
