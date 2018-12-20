@@ -15,7 +15,9 @@ class MovieContent extends Component {
       details: {},
       video: '',
       isLoading: true,
-      lightboxState: "lightbox--closed"
+      lightboxState: "lightbox--closed",
+      videoURL: '',
+      isOpen: true
     }
 
     this.fetchAPI = this.fetchAPI.bind(this);
@@ -51,7 +53,8 @@ class MovieContent extends Component {
   // Open video lightbox on click of trailer btn
   openLightBox(e) {
     this.setState({
-      lightboxState: "lightbox"
+      lightboxState: "lightbox",
+      isOpen: true
     });
   }
 
@@ -60,6 +63,7 @@ class MovieContent extends Component {
     if (this.state.lightboxState === "lightbox") {
       this.setState({
         lightboxState: "lightbox--closed",
+        isOpen: false
       });
     }
   }
@@ -88,7 +92,7 @@ class MovieContent extends Component {
     const { cast } = this.state
 
     const imgURL = `https://image.tmdb.org/t/p/original/${backdrop_path}`;
-    const threeCastMembers = cast.splice(0, 3).map(actor => actor.name).join(", ");
+    const threeCastMembers = cast.slice(0, 3).map(actor => actor.name).join(", ");
     const formatTime = this.renderTime(runtime);
     const renderGenres = genres.map((genre, index) => <li key={index} className="movie__genre">{genre.name}</li>);
     const videoURL = `https://www.youtube.com/embed/${this.state.video[0].key}?enablejsapi=1`;
@@ -117,7 +121,7 @@ class MovieContent extends Component {
         </div>
 
         <LightBox
-          videoURL={videoURL}
+          videoURL={this.state.isOpen ? videoURL : ''}
           title={title}
           lightboxState={this.state.lightboxState}
           onClick={this.closeLightBox} />

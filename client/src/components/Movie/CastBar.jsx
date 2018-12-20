@@ -5,12 +5,6 @@ import profile from '../../images/blank-profile.png';
 import '../../scss/partials/castbar.scss';
 
 class CastBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      swiper: {}
-    }
-  }
   componentDidMount() {
     this.forceUpdate();
   }
@@ -35,6 +29,7 @@ class CastBar extends Component {
   }
 
   render() {
+    console.log(this.props)
     // Generate Cast Cards
     let renderedCards = this.props.data.map((actor, index) => {
       const { character, name, profile_path, } = actor;
