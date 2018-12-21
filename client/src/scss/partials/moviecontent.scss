@@ -9,7 +9,7 @@
   align-items: center;
   width: 100%;
   position: relative;
-  height: 110rem;
+  height: 100rem;
   overflow: hidden;
 }
 
@@ -155,4 +155,7 @@
   font-weight: bold;
   text-decoration: none;
   text-transform: uppercase;
+  &:hover {
+    cursor: pointer;
+  }
 }
