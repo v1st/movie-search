@@ -8,18 +8,14 @@ class Carousel extends Component {
     this.state = {
       carouselData: []
     }
+
+    this.fetchAPI = this.fetchAPI.bind(this);
   }
 
+  signal = axios.CancelToken.source();
+
   componentDidMount() {
-    // Serve Movie Database info from backend
-    axios.get('/api/header')
-      .then(res => {
-        let slicedArr = res.data.pageResults.results.slice(0, 4);
-        this.setState({
-          carouselData: slicedArr
-        })
-      })
-      .catch(e => console.log(e));
+    this.fetchAPI();
   }
 
   componentDidUpdate() {
@@ -48,6 +44,33 @@ class Carousel extends Component {
     });
   }
 
+  componentWillUnmount() {
+    this.signal.cancel('Api is being canceled');
+  }
+
+  async fetchAPI() {
+    // Serve Movie Database info from backend
+    try {
+      this.setState({ isLoading: true });
+
+      await axios.get('/api/header', {
+        cancelToken: this.signal.token
+      })
+        .then(res => {
+          let slicedArr = res.data.pageResults.results.slice(0, 4);
+          this.setState({
+            carouselData: slicedArr
+          })
+        })
+        .catch(e => console.log(e));
+    } catch (err) {
+      if (axios.isCancel(err)) {
+        console.log('Error: ', err.message); // => prints: Api is being canceled
+      } else {
+        this.setState({ isLoading: false });
+      }
+    }
+  }
 
   render() {
     // Render slides for Landing carousel

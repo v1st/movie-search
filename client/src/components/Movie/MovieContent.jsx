@@ -26,23 +26,41 @@ class MovieContent extends Component {
     this.closeLightBox = this.closeLightBox.bind(this);
   }
 
+  signal = axios.CancelToken.source();
+
   componentDidMount() {
     this.fetchAPI();
   }
 
+  componentWillUnmount() {
+    this.signal.cancel('Api is being canceled');
+  }
+
   // Fetch movie details and cast info
-  fetchAPI() {
-    axios.post(`/api/movie/${this.props.match.params.id}`, {
-      id: `${this.props.match.params.id}`
-    })
-      .then(response =>
-        this.setState({
-          cast: response.data.param.cast,
-          details: response.data.param.details,
-          video: response.data.param.video.results,
-          isLoading: false,
-        }))
-      .catch(err => console.log(err));
+  async fetchAPI() {
+    try {
+      this.setState({ isLoading: true });
+
+      await axios.post(`/api/movie/${this.props.match.params.id}`, {
+        id: `${this.props.match.params.id}`
+      }, {
+          cancelToken: this.signal.token
+        })
+        .then(response =>
+          this.setState({
+            cast: response.data.param.cast,
+            details: response.data.param.details,
+            video: response.data.param.video.results,
+            isLoading: false,
+          }))
+        .catch(err => console.log(err));
+    } catch (err) {
+      if (axios.isCancel(err)) {
+        console.log('Error: ', err.message); // => prints: Api is being canceled
+      } else {
+        this.setState({ isLoading: false });
+      }
+    }
   }
 
   // Format run time 

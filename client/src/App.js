@@ -19,6 +19,7 @@ class App extends Component {
               <Route path='/' component={LandingPage} exact />
               <Route path="/movie/:id" component={Movie}/>
               <Route path="/search/:query" component={Search} />
+              <Route path="/search/" component={Search} />
               <Route component={Missing} />
             </Switch>
           </div>

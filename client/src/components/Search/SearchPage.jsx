@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
 import axios from 'axios';
@@ -14,24 +15,59 @@ export class SearchPage extends Component {
 
     this.state = {
       searchResults: [],
+      isLoading: false
     }
+
+    this.loadMovie = this.loadMovie.bind(this);
+  }
+
+  signal = axios.CancelToken.source();
+
+  componentDidMount() {
+    this._isMounted = true;
+
+    this.loadMovie();
   }
 
   componentDidUpdate(prevProps) {
+    console.log(this.props)
     // Check search input and gather requested data
     if (this.props.match.params.query !== prevProps.match.params.query) {
       console.log(this.props.match.params.query)
-      axios.post(`/api/search/${this.props.match.params.query}`, {
-        query: this.props.match.params.query
-      })
+      this.loadMovie();
+    }
+  }
+
+  componentWillUnmount() {
+    this.signal.cancel('Api is being canceled');
+  }
+
+  async loadMovie() {
+    try {
+      this.setState({ isLoading: true });
+
+      await axios.post(`/api/search/${this.props.match.params.query}`, {
+        query: this.props.match.params.query,
+      },
+        {
+          cancelToken: this.signal.token
+        })
         .then(response => {
           this.setState({
-            searchResults: response.data.payload.results
+            searchResults: response.data.payload.results,
+            isLoading: true
           });
         })
         .catch(err => console.log(err));
+    } catch (err) {
+      if (axios.isCancel(err)) {
+        console.log('Error: ', err.message); // => prints: Api is being canceled
+      } else {
+        this.setState({ isLoading: false });
+      }
     }
   }
+
 
   static propTypes = {
     match: PropTypes.object.isRequired,
@@ -40,12 +76,39 @@ export class SearchPage extends Component {
   };
 
   render() {
-    // const { match, location, history } = this.props;
+    const renderSearchResults = this.state.searchResults.map((movie, index) => {
+      const { id, poster_path, title, release_date, vote_average } = movie
+      let img = `https://image.tmdb.org/t/p/original${poster_path}`;
+
+      return (
+        <React.Fragment key={index}>
+          <Link to={{ pathname: `/movie/${id}` }} key={index} className="search__card">
+            <div className="slide__bg">
+              <img className="bg__img" src={img} alt="slide" />
+            </div>
+
+            <div className="slide__info">
+              <div className="title">{title}</div>
+              <div className="rating">{vote_average}/10</div>
+              <div className="date">{release_date}</div>
+              <div className="text">
+              </div>
+            </div>
+          </Link>
+        </React.Fragment>
+      )
+    });
+
+
     return (
       <React.Fragment>
         <NavBar />
         <main className="searchpage">
-          
+          <div className="search__container">
+            <ul className="search__card-wrap">
+              {renderSearchResults}
+            </ul>
+          </div>
         </main>
         <Footer />
       </React.Fragment>
