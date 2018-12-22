@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import LandingPage from './components/LandingPage/LandingPage';
 import Movie from './components/Movie/Movie';
+import Search from './components/Search/SearchPage';
 import Missing from './components/Missing';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -17,6 +18,7 @@ class App extends Component {
             <Switch>
               <Route path='/' component={LandingPage} exact />
               <Route path="/movie/:id" component={Movie}/>
+              <Route path="/search/:query" component={Search} />
               <Route component={Missing} />
             </Switch>
           </div>

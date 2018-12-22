@@ -83,7 +83,7 @@ router.post('/movie/:id', async (req, res) => {
 });
 
 // Post movie search and serve results
-router.post('/search', async (req, res) => {
+router.post('/search/:query', async (req, res) => {
   const searchQuery = req.body.query.replace(' ', '%20');
   const searchURL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=1&include_adult=false`;
   let results;

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import '../../scss/partials/navbar.scss';
 
 class NavBar extends Component {
@@ -8,9 +7,9 @@ class NavBar extends Component {
     super(props);
 
     this.state = {
-      searchInput: ''
+      searchInput: '',
     }
-    
+
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -22,12 +21,7 @@ class NavBar extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
-    axios.post('/api/search', {
-      query: this.state.searchInput
-    })
-      .then(response => {console.log(response.data.payload.results)})
-      .catch(err => console.log(err));
+    // e.preventDefault();
   }
 
   render() {
@@ -39,7 +33,9 @@ class NavBar extends Component {
 
         <form className="searchbar__form" onSubmit={this.handleSubmit}>
           <input onChange={(e) => this.handleInput(e)} value={this.state.searchInput} className="searchbar__input" type="search" placeholder="Search" aria-label="Search" />
-          <button className="searchbar__button" type="submit">Search</button>
+          <Link to={`/search/${this.state.searchInput}`}>
+            <button className="searchbar__button" type="submit">Search</button>
+          </Link>
         </form>
       </nav>
     )
