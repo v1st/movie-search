@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const CronJob = require('cron').CronJob;
 const path = require('path');
 
 const app = express();
@@ -10,7 +11,7 @@ const port = process.env.PORT || 5000;
 // Secret Keys for App
 const keys = require('./config/keys');
 // const apiKey = keys.API_KEY;
-const db = keys.URI;
+const db =  process.env.URI || keys.URI;
 
 // Middleware
 app.use(bodyParser.json());
@@ -28,9 +29,12 @@ mongoose
 const router = require('./routes/api');
 app.use('/api', router);
 
-// Connect API Updater
+// Connect API Updater and Update every hour
 const updater = require('./api/updater');
-updater.updateMovies();
+new CronJob('0 0 * * * *', () => {
+  console.log('Database Updated.');
+  updater.updateMovies();
+}, null, true, 'America/Los_Angeles');
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {

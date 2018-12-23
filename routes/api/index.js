@@ -4,7 +4,7 @@ const axios = require('axios');
 
 const {
   API_KEY
-} = require('../../config/keys');
+} = process.env.API_KEY || require('../../config/keys');
 
 // Movie model
 const Movie = require('../../models/Movie');
