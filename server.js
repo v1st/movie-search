@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000;
 // Secret Keys for App
 const keys = require('./config/keys');
 // const apiKey = keys.API_KEY;
-const db =  process.env.URI || keys.URI;
+const db =  keys.URI;
 
 // Middleware
 app.use(bodyParser.json());
