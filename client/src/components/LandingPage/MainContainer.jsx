@@ -27,11 +27,11 @@ class MainContainer extends Component {
     this.signal.cancel('Api is being canceled');
   }
 
-  async fetchAPI() {
+  fetchAPI() {
     try {
       this.setState({ isLoading: true });
 
-      await axios.get('/api', {
+      axios.get('/api', {
         cancelToken: this.signal.token
       })
         .then(res => this.setState({

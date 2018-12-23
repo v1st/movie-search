@@ -3,18 +3,23 @@ import { Link } from 'react-router-dom';
 import Swiper from 'swiper';
 
 class SlideSmall extends Component {
+  componentDidMount() {
+  }
+
   componentDidUpdate() {
     // Init Swiper.js Carousel
-    // eslint-disable-next-line
-    const swiper2 = new Swiper('.swiper2', {
-      init: true,
-      slidesPerView: 6,
-      spaceBetween: 15,
-      loop: true,
-      autoplayDisableOnInteraction: false,
-      effect: 'slide',
-      centeredSlides: true,
-    });
+    if (this.props.data) {
+      // eslint-disable-next-line
+      const swiper2 = new Swiper('.swiper2', {
+        init: true,
+        slidesPerView: 6,
+        spaceBetween: 15,
+        loop: true,
+        effect: 'slide',
+        centeredSlides: true,
+        lazy: true
+      });
+    }
   }
 
   render() {
