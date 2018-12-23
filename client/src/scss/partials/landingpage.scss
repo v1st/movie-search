@@ -1,6 +1,6 @@
 @import 'colors';
 
-.carousel__wrap {
+.swiper1 {
   position: relative;
   border-bottom: 1px solid $light-grey;
 
@@ -94,6 +94,7 @@ img {
   opacity: 0.6;
   border-radius: 50%;
   transition: all 0.2s ease-out;
+  padding-bottom: 5px;
 
   &:hover {
     cursor: pointer;

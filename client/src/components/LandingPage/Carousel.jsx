@@ -6,7 +6,8 @@ class Carousel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      carouselData: []
+      carouselData: [],
+      isLoading: true
     }
 
     this.fetchAPI = this.fetchAPI.bind(this);
@@ -26,7 +27,7 @@ class Carousel extends Component {
       slidesPerView: 1,
       spaceBetween: 0,
       loop: true,
-      grabCursor: true,
+      paginationClickable: true,
       effect: 'slide',
       centeredSlides: true,
       autoplay: {
@@ -48,28 +49,19 @@ class Carousel extends Component {
     this.signal.cancel('Api is being canceled');
   }
 
-  async fetchAPI() {
+  fetchAPI() {
     // Serve Movie Database info from backend
-    try {
-      this.setState({ isLoading: true });
-
-      await axios.get('/api/header', {
-        cancelToken: this.signal.token
-      })
-        .then(res => {
-          let slicedArr = res.data.pageResults.results.slice(0, 4);
-          this.setState({
-            carouselData: slicedArr
-          })
+    axios.get('/api/header', {
+      cancelToken: this.signal.token
+    })
+      .then(res => {
+        let slicedArr = res.data.pageResults.results.slice(0, 4);
+        this.setState({
+          carouselData: slicedArr,
+          isLoading: false
         })
-        .catch(e => console.log(e));
-    } catch (err) {
-      if (axios.isCancel(err)) {
-        console.log('Error: ', err.message); // => prints: Api is being canceled
-      } else {
-        this.setState({ isLoading: false });
-      }
-    }
+      })
+      .catch(e => console.log(e));
   }
 
   render() {
@@ -95,7 +87,7 @@ class Carousel extends Component {
     });
 
     return (
-      <div className="carousel__wrap swiper-container swiper1">
+      <div className="swiper-container swiper1">
         <div className="swiper-wrapper">
           {renderedSlides}
         </div>

@@ -8,13 +8,12 @@ class Footer extends Component {
     return (
       <footer className="footer">
         <div className="footer__wrap">
-          <div className="image__wrap">
+          <a href="https://www.themoviedb.org/" className="image__wrap">
             <img src={logo} alt="the movie database logo" />
-          </div>
-          <div className="footer-content__container">
-          
-          </div>
+          </a>
+            <a href="https://github.com/v1st/movie-search" className="github__link">View Code</a>
         </div>
+
         <div className="footer--small">
           <div className="copyright">Copyright&copy; 2018. Created by v1st, powered by <a href="https://www.themoviedb.org/" className="tmdb__link">TheMovieDB</a> API.</div>
         </div>

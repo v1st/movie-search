@@ -9,23 +9,47 @@ class MainContainer extends Component {
     super(props);
     this.state = {
       titles: ['Popular', 'Upcoming', 'Now Playing'],
-      movieData: []
+      movieData: [],
+      isLoading: false
     }
+
+    this.fetchAPI = this.fetchAPI.bind(this);
   }
+
+  signal = axios.CancelToken.source();
 
   componentDidMount() {
     // Serve Movie Database info from backend
-    axios.get('/api')
-      .then(res => this.setState({
-        movieData: res.data
-      }))
-      .catch(e => console.log(e));
+    this.fetchAPI();
   }
 
+  componentWillUnmount() {
+    this.signal.cancel('Api is being canceled');
+  }
+
+  async fetchAPI() {
+    try {
+      this.setState({ isLoading: true });
+
+      await axios.get('/api', {
+        cancelToken: this.signal.token
+      })
+        .then(res => this.setState({
+          movieData: res.data
+        }))
+        .catch(e => console.log(e));
+    } catch (err) {
+      if (axios.isCancel(err)) {
+        console.log('Error: ', err.message); // => prints: Api is being canceled
+      } else {
+        this.setState({ isLoading: false });
+      }
+    }
+  }
 
   render() {
-    const renderSmallSlides = this.state.titles.map((slide,index) => 
-      <SlideSmall key={index} title={slide} data={this.state.movieData[index]}/>
+    const renderSmallSlides = this.state.titles.map((slide, index) =>
+      <SlideSmall key={index} title={slide} data={this.state.movieData[index]} />
     );
 
     return (

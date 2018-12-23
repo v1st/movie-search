@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import CastBar from './CastBar';
 import LightBox from './LightBox';
+import Loader from '../Loader';
 
 class MovieContent extends Component {
   constructor(props) {
@@ -96,13 +97,7 @@ class MovieContent extends Component {
     // Loading animation before api call
     if (this.state.isLoading) {
       return (
-        <main className="main__container">
-          <div className="LoaderBalls">
-            <div className="LoaderBalls__item"></div>
-            <div className="LoaderBalls__item"></div>
-            <div className="LoaderBalls__item"></div>
-          </div>
-        </main>
+        <Loader />
       );
     }
 

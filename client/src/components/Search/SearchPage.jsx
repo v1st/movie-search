@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import NavBar from '../NavBar/NavBar';
 import Footer from '../Footer/Footer';
+import Loader from '../Loader';
 
 import '../../scss/partials/searchpage.scss';
 import '../../scss/partials/maincontent.scss';
@@ -16,7 +17,7 @@ export class SearchPage extends Component {
 
     this.state = {
       searchResults: [],
-      isLoading: false
+      isLoading: true
     }
 
     this.loadMovie = this.loadMovie.bind(this);
@@ -54,7 +55,7 @@ export class SearchPage extends Component {
         .then(response => {
           this.setState({
             searchResults: response.data.payload.results,
-            isLoading: true
+            isLoading: false
           });
         })
         .catch(err => console.log(err));
@@ -74,6 +75,13 @@ export class SearchPage extends Component {
   };
 
   render() {
+    // Loading animation before api call
+    if (this.state.isLoading) {
+      return (
+        <Loader />
+      );
+    }
+
     const renderSearchResults = this.state.searchResults.map((movie, index) => {
       const { id, poster_path, title, release_date, vote_average } = movie
       let img = `https://image.tmdb.org/t/p/original${poster_path}`;
@@ -96,7 +104,6 @@ export class SearchPage extends Component {
         </React.Fragment>
       )
     });
-
 
     return (
       <React.Fragment>
