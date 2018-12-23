@@ -8,6 +8,7 @@ import NavBar from '../NavBar/NavBar';
 import Footer from '../Footer/Footer';
 
 import '../../scss/partials/searchpage.scss';
+import '../../scss/partials/maincontent.scss';
 
 export class SearchPage extends Component {
   constructor(props) {
@@ -30,10 +31,8 @@ export class SearchPage extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props)
     // Check search input and gather requested data
     if (this.props.match.params.query !== prevProps.match.params.query) {
-      console.log(this.props.match.params.query)
       this.loadMovie();
     }
   }
@@ -67,7 +66,6 @@ export class SearchPage extends Component {
       }
     }
   }
-
 
   static propTypes = {
     match: PropTypes.object.isRequired,
