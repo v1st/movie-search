@@ -27,7 +27,7 @@ class Carousel extends Component {
       slidesPerView: 1,
       spaceBetween: 0,
       loop: true,
-      paginationClickable: true,
+      grabCursor: true,
       effect: 'slide',
       centeredSlides: true,
       autoplay: {

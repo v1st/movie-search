@@ -7,9 +7,7 @@ import '../../scss/partials/castbar.scss';
 class CastBar extends Component {
   componentDidMount() {
     this.forceUpdate();
-  }
 
-  componentDidUpdate() {
     // Init Swiper.js Carousel
     // eslint-disable-next-line
     const swiper3 = new Swiper('.swiper3', {
@@ -27,7 +25,7 @@ class CastBar extends Component {
       },
     });
   }
-
+  
   render() {
     // Generate Cast Cards
     let renderedCards = this.props.data.map((actor, index) => {
