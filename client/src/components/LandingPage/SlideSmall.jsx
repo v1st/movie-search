@@ -17,7 +17,22 @@ class SlideSmall extends Component {
         loop: true,
         effect: 'slide',
         centeredSlides: true,
-        lazy: true
+        lazy: true,
+        breakpointsInverse: true,
+        breakpoints: {
+          // when window width is >= 800px
+          800: {
+            slidesPerView: 6,
+          },
+          // when window width is >= 480px
+          480: {
+            slidesPerView: 4,
+          },
+          // when window width is >= 0px
+          0: {
+            slidesPerView: 3,
+          }
+        }
       });
     }
   }

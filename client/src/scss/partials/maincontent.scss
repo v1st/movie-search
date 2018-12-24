@@ -32,7 +32,7 @@
 // Swiper styles
 .swiper2 {
   width: 100%;
-  height: 260px;
+  height: 270px;
   overflow: hidden;
 }
 
@@ -41,6 +41,7 @@
   transition: opacity 1s ease-out;
   border-radius: 0.5rem;
   overflow: hidden;
+  min-width: 200px;
 
   &:hover {
     opacity: 1;
@@ -59,14 +60,11 @@
 
 .slide__bg {
   flex: 1 0 100%;
-  min-height: 100%;
-  width: 100%;
-  max-width: 125%;
-  background: no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  min-height: 270px;
+}
+
+.bg__img{
+  object-fit: cover;
 }
 
 .slide__info {
@@ -123,4 +121,43 @@
   background: rgb(255, 255, 255);
   background: linear-gradient(90deg, rgba(255, 255, 255, 0) 10%, $primary 20%, $dark-primary 50%, $primary 80%, rgba(255, 255, 255, 0) 90%);
   margin-top: 0.5rem;
+}
+
+// Responsive styles
+@media only screen and (max-width: 1250px) {
+  .main__container {
+    padding: 0 15px;
+  }
+}
+@media only screen and (max-width: 680px) {
+  .main__container {
+    height: 105rem;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .main__container {
+    align-items: flex-start;
+    height: 95rem;
+  }
+  .main__wrap {
+    height: 90rem;
+
+  }
+  .slider__section {
+    height: 200px;
+  }
+  .slide--small {
+    min-width: 136px;
+    width: 136px;
+  }
+  .slide__bg {
+    min-height:200px;
+    max-height:200px;
+  }
+  .slide__info .title {
+    font-size: 1.8rem;
+  }
+  .slide__info .rating {
+    font-size: 1.4rem;
+  }
 }

@@ -3,19 +3,6 @@
 .swiper1 {
   position: relative;
   border-bottom: 1px solid $light-grey;
-
-  &::after {
-    content: '';
-    display: block;
-    box-shadow: inset 0 -10rem 20rem $dark-grey;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
-    pointer-events: none;
-  }
 }
 
 img {
@@ -74,7 +61,7 @@ img {
   text-align: left;
   margin-bottom: 1rem;
   color: white;
-  z-index: 20;
+  z-index: 6;
 }
 
 .previous__button,
@@ -95,7 +82,6 @@ img {
   opacity: 0.8;
   border-radius: 50%;
   transition: all 0.2s ease-out;
-  padding-bottom: 5px;
 
   &:hover {
     cursor: pointer;
@@ -118,8 +104,7 @@ img {
   right: 5%;
 }
 
-// Swiper carousel styles
-
+// Swiper carousel styles 
 .swiper-container {
   width: 100%;
   max-height: 100%;
@@ -158,4 +143,61 @@ img {
 .swiper-pagination-bullet-active {
   background-color: $primary-light;
   box-shadow: 0 0 1rem $primary;
+}
+
+// Responsive styles
+
+@media only screen and (max-width: 1200px) {
+  .banner__info {
+    padding: 3% 14%;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .banner__title {
+    font-size: 4rem;
+  }
+  .banner__text {
+    font-size: 2.2rem;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .banner__title {
+    font-size: 3rem;
+  }
+  .banner__rating {
+    font-size: 1.6rem;
+  }
+  .banner__date {
+    font-size: 1.2rem;
+  }
+  .banner__text {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .banner__title {
+    font-size: 2.6rem;
+  }
+  .banner__rating {
+    font-size: 1.4rem;
+  }
+  .banner__text {
+    display: none;
+  }
+  .previous__button,
+  .next__button {
+    width: 3rem;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 2rem;
+    padding: 0;
+   }
+}
+@media only screen and (max-width: 480px) {
+  .banner__title {
+    font-size: 2.2rem;
+  }
 }

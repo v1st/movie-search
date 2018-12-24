@@ -38,11 +38,11 @@ class MovieContent extends Component {
   }
 
   // Fetch movie details and cast info
-  async fetchAPI() {
+  fetchAPI() {
     try {
       this.setState({ isLoading: true });
 
-      await axios.post(`/api/movie/${this.props.match.params.id}`, {
+      axios.post(`/api/movie/${this.props.match.params.id}`, {
         id: `${this.props.match.params.id}`
       }, {
           cancelToken: this.signal.token
