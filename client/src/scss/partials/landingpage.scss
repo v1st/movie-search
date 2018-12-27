@@ -49,6 +49,15 @@ img {
   opacity: 0.9;
 }
 
+.banner__text-wrap {
+  width: auto;
+  height: auto;
+  padding: 1rem;
+  background: rgba(black, 0.6);
+  text-align: left;
+  border-radius: 0.5rem;
+}
+
 .banner__date {
   font-size: 1.6rem;
   color: white;
@@ -149,7 +158,7 @@ img {
 
 @media only screen and (max-width: 1200px) {
   .banner__info {
-    padding: 3% 14%;
+    padding: 4% 14%;
   }
 }
 

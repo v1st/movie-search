@@ -8,8 +8,9 @@ import NavBar from '../NavBar/NavBar';
 import Footer from '../Footer/Footer';
 import Loader from '../Loader';
 
-import '../../scss/partials/searchpage.scss';
 import '../../scss/partials/maincontent.scss';
+import '../../scss/partials/searchpage.scss';
+import none from '../../images/none.jpg';
 
 export class SearchPage extends Component {
   constructor(props) {
@@ -85,6 +86,9 @@ export class SearchPage extends Component {
     const renderSearchResults = this.state.searchResults.map((movie, index) => {
       const { id, poster_path, title, release_date, vote_average } = movie
       let img = `https://image.tmdb.org/t/p/original${poster_path}`;
+      if (!poster_path) {
+        img = none
+      }
 
       return (
         <React.Fragment key={index}>

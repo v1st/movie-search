@@ -23,6 +23,20 @@ class CastBar extends Component {
         disableOnInteraction: false,
         delay: 3500,
       },
+      breakpoints: {
+        // when window width is >= 800px
+        800: {
+          slidesPerView: 5,
+        },
+        // when window width is >= 480px
+        480: {
+          slidesPerView: 3,
+        },
+        // when window width is >= 0px
+        0: {
+          slidesPerView: 2,
+        }
+      }
     });
   }
   

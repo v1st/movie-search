@@ -77,9 +77,11 @@ class Carousel extends Component {
           <div className="banner__info">
             <div className="banner__title">{title}</div>
             <div className="banner__rating">{vote_average}/10</div>
-            <div className="banner__date">{release_date}</div>
-            <div className="banner__text">
-              <p>{overview}</p>
+            <div className="banner__text-wrap">
+              <div className="banner__date">{release_date}</div>
+              <div className="banner__text">
+                <p>{overview}</p>
+              </div>
             </div>
           </div>
         </div>

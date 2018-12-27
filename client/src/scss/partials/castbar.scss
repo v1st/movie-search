@@ -9,15 +9,16 @@
   display: flex;
   flex-direction: column;
   background: white;
-  width: 250px;
+  min-width: 85px;
+  max-width: 85px;
   height: 100%;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
 }
 
 .cast__pic-wrap {
   flex: 1 0 100%;
-  min-height: 75%;
-  max-height: 75%;
+  min-height: 70%;
+  max-height: 70%;
   max-width: 100%;
   overflow: hidden;
     
@@ -36,6 +37,6 @@
 }
 
 .name {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-family: sans-serif;
 }
