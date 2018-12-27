@@ -42,7 +42,7 @@ class SlideSmall extends Component {
     if (this.props.data) {
       renderedSlides = this.props.data.pageResults.results.map((slide, index) => {
         const { id, poster_path, title, release_date, vote_average } = slide
-        let img = `https://image.tmdb.org/t/p/original${poster_path}`;
+        let img = `https://image.tmdb.org/t/p/w200${poster_path}`;
 
         return (
           <React.Fragment key={index}>

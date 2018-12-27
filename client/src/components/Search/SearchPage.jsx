@@ -85,7 +85,7 @@ export class SearchPage extends Component {
 
     const renderSearchResults = this.state.searchResults.map((movie, index) => {
       const { id, poster_path, title, release_date, vote_average } = movie
-      let img = `https://image.tmdb.org/t/p/original${poster_path}`;
+      let img = `https://image.tmdb.org/t/p/w200${poster_path}`;
       if (!poster_path) {
         img = none
       }
