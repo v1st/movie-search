@@ -44,7 +44,7 @@ class CastBar extends Component {
     // Generate Cast Cards
     let renderedCards = this.props.data.map((actor, index) => {
       const { character, name, profile_path, } = actor;
-      let img = `https://image.tmdb.org/t/p/original${profile_path}`;
+      let img = `https://image.tmdb.org/t/p/w185${profile_path}`;
       if (!profile_path) {
         img = profile
       }

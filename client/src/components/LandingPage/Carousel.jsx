@@ -68,7 +68,7 @@ class Carousel extends Component {
     // Render slides for Landing carousel
     const renderedSlides = this.state.carouselData.map((slide, index) => {
       const { overview, backdrop_path, title, release_date, vote_average } = slide
-      let img = `https://image.tmdb.org/t/p/original${backdrop_path}`;
+      let img = `https://image.tmdb.org/t/p/w1280${backdrop_path}`;
 
       return (
         <div key={index} className="swiper-slide">
