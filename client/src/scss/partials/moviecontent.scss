@@ -2,6 +2,7 @@
 
 // Movie Content
 .main-movie__container {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,7 +10,6 @@
   width: 100%;
   position: relative;
   min-height: 100vh;
-  height: auto;
   overflow: hidden;
 }
 
@@ -20,14 +20,13 @@
   align-items: flex-start;
   width: 100%;
   max-width: 120rem;
-  min-height: 90rem;
-  height: 90%;
+  min-height: 95vh;
   padding: 0 1.5rem;
 }
 
 // Movie poster
 .poster__wrap {
-  position: relative;
+  position: absolute;
   display: flex;
   justify-content: flex-start;
   align-content: center;
